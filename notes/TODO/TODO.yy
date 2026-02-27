@@ -1,0 +1,11 @@
+{
+  "$GMNotes":"v1",
+  "%Name":"TODO",
+  "name":"TODO",
+  "parent":{
+    "name":"Tilesets",
+    "path":"folders/Tilesets.yy",
+  },
+  "resourceType":"GMNotes",
+  "resourceVersion":"2.0",
+}
