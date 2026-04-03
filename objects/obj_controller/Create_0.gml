@@ -2,7 +2,7 @@
 
 // Player HP
 global.player_health = 100;
-global.player_max_health = 100;
+global.player_health_max = 100;
 
 // Player Ammo for Ranged Attack
 global.player_ammo = 0;
@@ -12,6 +12,13 @@ global.player_ammo_max = 10;
 global.player_energy = 0; // Initialized at 0
 global.player_energy_max = 100;
 
-// Respawn anchor
+// Current respawn anchor
+global.respawn_room = "DebugRoom";
 global.respawn_x = 0;
 global.respawn_y = 0;
+
+// Global flag checks
+global.has_double_jump = false; // 
+
+//DEBUG
+room_goto(DebugRoom);
