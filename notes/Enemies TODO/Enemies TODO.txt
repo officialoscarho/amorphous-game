@@ -1,0 +1,16 @@
+ENEMIES IN SCOPE FOR APRIL, 30 BUILD
+
+Regular:
+  obj_enemy_worker          (L1, L2 - melee)
+  obj_enemy_scientist       (L1 only - flees)
+  obj_enemy_security_guard  (L1, L2 - ranged)
+  obj_enemy_soldier         (L2 - faster melee with plasma sword)
+
+Bosses:
+  obj_boss_security         (L1 - Head of Security, 3 weapon phases)
+  obj_boss_construction     (L2 - Katya in mech, melee + thrown objects)
+
+OUT OF SCOPE FOR BUILD (post-launch / portfolio polish):
+  Marines, drones, turrets, officers
+  All elite variants
+  obj_boss_cruiser (Kaine - L3 territory)

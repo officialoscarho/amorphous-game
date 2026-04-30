@@ -1,3 +1,5 @@
-Tilesets for each of the three levels
+LIVE TODO
+- Reflect actual current state of the project. Update as items complete.
+- Cross out completed items rather than deleting (audit trail).
 
-16 tiles in 64x64 size
+Currently at Step 9, has not yet tested Step 1-8

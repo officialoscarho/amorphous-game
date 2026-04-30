@@ -1,0 +1,12 @@
+event_inherited();
+hp_max = 60;
+hp = hp_max;
+contact_damage = 15;
+move_speed = 2.5;
+detect_range = 320;
+attack_range = 44;
+attack_cooldown_max = 40;
+state = ESTATE.PATROL;
+state_timer = 60;
+mask_index = spr_mask_enemy_soldier;
+sprite_index = spr_enemy_soldier_idle;

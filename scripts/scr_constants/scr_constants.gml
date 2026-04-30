@@ -1,0 +1,44 @@
+enum PSTATE {
+    BLOB,
+    NORMAL,
+    DASHING,
+    HURT,
+    DEAD
+}
+
+enum ESTATE {
+    IDLE,
+    PATROL,
+    ALERT,
+    ATTACK,
+    HURT,
+    DEAD,
+    FLEE
+}
+
+#macro LAYER_TILES     "MainTiles"
+#macro LAYER_INSTANCES "Instances"
+#macro LAYER_BG        "Background"
+
+#macro PLAYER_MOVE_SPEED 4
+#macro PLAYER_BLOB_SPEED 3
+#macro PLAYER_JUMP_FORCE -12
+#macro PLAYER_GRAVITY 0.5
+#macro PLAYER_FALL_CAP 20
+#macro PLAYER_DASH_SPEED 12
+#macro PLAYER_DASH_FRAMES 10
+#macro PLAYER_DASH_COOLDOWN_FRAMES 24
+#macro PLAYER_INVULN_FRAMES 30
+#macro PLAYER_ATTACK_COOLDOWN 18
+#macro PLAYER_ATTACK_DAMAGE 20
+
+#macro ENEMY_KNOCKBACK_X 4
+#macro ENEMY_KNOCKBACK_Y -3
+#macro ENEMY_HURT_FRAMES 10
+
+#macro PICKUP_HEALTH_AMOUNT 25
+#macro PICKUP_ENERGY_AMOUNT 25
+#macro KILL_ENERGY_GAIN 20
+
+#macro SAVE_FILE "amorphous_save.json"
+#macro MEMORY_FRAGMENT_COUNT 4

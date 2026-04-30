@@ -1,24 +1,11 @@
-// Global values controller
+game_runtime_init();
 
-// Player HP
-global.player_health = 100;
-global.player_health_max = 100;
+if (!instance_exists(obj_hud)) {
+    instance_create_layer(0, 0, LAYER_INSTANCES, obj_hud);
+}
 
-// Player Ammo for Ranged Attack
-global.player_ammo = 0;
-global.player_ammo_max = 10;
+if (!instance_exists(obj_pause_menu)) {
+    instance_create_layer(0, 0, LAYER_INSTANCES, obj_pause_menu);
+}
 
-// Player Energy
-global.player_energy = 0; // Initialized at 0
-global.player_energy_max = 100;
-
-// Current respawn anchor
-global.respawn_room = "DebugRoom";
-global.respawn_x = 0;
-global.respawn_y = 0;
-
-// Global flag checks
-global.has_double_jump = false; // 
-
-//DEBUG
-room_goto(DebugRoom);
+room_goto(rm_title);

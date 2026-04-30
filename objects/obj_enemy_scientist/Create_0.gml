@@ -1,0 +1,11 @@
+event_inherited();
+hp_max = 1;
+hp = hp_max;
+contact_damage = 0;
+move_speed = 1.2;
+detect_range = 260;
+attack_range = 0;
+state = ESTATE.IDLE;
+drop_table = "none";
+mask_index = spr_mask_enemy_scientist;
+sprite_index = spr_enemy_scientist_idle;

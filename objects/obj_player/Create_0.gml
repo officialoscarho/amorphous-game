@@ -1,28 +1,34 @@
-// Initialize Movement Vars
+state = PSTATE.NORMAL;
+
 xsp = 0;
 ysp = 0;
-grv = 0.5;
-move_spd = 4;
-jump_force = -12;
-jumps_max = 2;
-jumps_left = 2;
-on_ground = false;
-
-// Initialize Combat Vars
-attack_cooldown = 0;
-attack_cooldown_max = 30;
 facing = 1;
+on_ground = false;
+jumps_left = 1;
 
-// Collision Tile Set
-collision_layer = layer_tilemap_get_id("MainTiles");
+attack_cooldown = 0;
+attack_anim_timer = 0;
+invuln_frames = 0;
+hurt_frames = 0;
+death_timer = 0;
 
-//Functions
-//Created in scr_player
+dash_frames = 0;
+dash_cooldown = 0;
+dash_dir = 1;
 
-// Camera
+mask_index = spr_mask_player;
+sprite_index = spr_player_humanoid_idle;
+
+if (global.pending_spawn_active) {
+    x = global.pending_spawn_x;
+    y = global.pending_spawn_y;
+    state = global.pending_player_state;
+    global.pending_spawn_active = false;
+}
+
 cam = camera_create();
-camera_set_view_size(cam, 1920, 1080);
+camera_set_view_size(cam, 1366, 768);
 view_set_camera(0, cam);
 view_set_visible(0, true);
-view_set_wport(0, 1920);
-view_set_hport(0, 1080);
+view_set_wport(0, 1366);
+view_set_hport(0, 768);

@@ -1,0 +1,12 @@
+event_inherited();
+hp_max = 30;
+hp = hp_max;
+contact_damage = 10;
+move_speed = 1.5;
+detect_range = 220;
+attack_range = 36;
+attack_cooldown_max = 50;
+state = ESTATE.PATROL;
+state_timer = 60;
+mask_index = spr_mask_enemy_worker;
+sprite_index = spr_enemy_worker_idle;

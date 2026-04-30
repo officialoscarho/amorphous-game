@@ -1,0 +1,1 @@
+sprite_index = is_open ? spr_door_open : spr_door_locked;

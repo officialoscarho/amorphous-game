@@ -3,8 +3,8 @@
   "%Name":"TODO",
   "name":"TODO",
   "parent":{
-    "name":"Tilesets",
-    "path":"folders/Tilesets.yy",
+    "name":"BLANK GAME",
+    "path":"BLANK GAME.yyp",
   },
   "resourceType":"GMNotes",
   "resourceVersion":"2.0",
