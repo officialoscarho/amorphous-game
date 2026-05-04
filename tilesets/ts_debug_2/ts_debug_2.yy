@@ -16,7 +16,7 @@
     "TileSerialiseData":[],
   },
   "name":"ts_debug_2",
-  "out_columns":7,
+  "out_columns":32,
   "out_tilehborder":2,
   "out_tilevborder":2,
   "parent":{
@@ -42,5 +42,5 @@
   "tileWidth":32,
   "tilexoff":0,
   "tileyoff":0,
-  "tile_count":48,
+  "tile_count":1036,
 }

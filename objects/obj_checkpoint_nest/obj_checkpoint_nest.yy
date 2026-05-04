@@ -9,8 +9,8 @@
   "name":"obj_checkpoint_nest",
   "overriddenProperties":[],
   "parent":{
-    "name":"Interactables",
-    "path":"folders/Interactables.yy",
+    "name":"Environmental",
+    "path":"folders/Environmental.yy",
   },
   "parentObjectId":null,
   "persistent":false,
