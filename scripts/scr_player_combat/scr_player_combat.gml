@@ -5,6 +5,7 @@ function player_take_damage(_amount, _from_x) {
 
     global.player_health -= _amount;
     invuln_frames = PLAYER_INVULN_FRAMES;
+    hurt_return_state = (state == PSTATE.BLOB) ? PSTATE.BLOB : PSTATE.NORMAL;
 
     if (global.player_health <= 0) {
         global.player_health = 0;

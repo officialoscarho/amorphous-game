@@ -14,7 +14,7 @@
   "name":"rm_l2_laser_gate",
   "parent":{
     "name":"Level 2",
-    "path":"folders/Levels/Level 2.yy",
+    "path":"folders/Rooms/Level 2.yy",
   },
   "parentRoom":null,
   "physicsSettings":{

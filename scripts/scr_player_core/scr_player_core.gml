@@ -57,7 +57,9 @@ function player_state_hurt() {
     player_apply_collision();
 
     hurt_frames--;
-    if (hurt_frames <= 0) state = PSTATE.NORMAL;
+    if (hurt_frames <= 0) {
+        state = (hurt_return_state == PSTATE.BLOB && !global.save.prologue_shift_done) ? PSTATE.BLOB : PSTATE.NORMAL;
+    }
 }
 
 function player_state_dead() {
@@ -90,8 +92,10 @@ function player_input_attack() {
         attack_cooldown = PLAYER_ATTACK_COOLDOWN;
         attack_anim_timer = 8;
 
-        var _atk_x = x + facing * 28;
-        var _atk_y = (state == PSTATE.BLOB) ? y - 28 : y - 64;
+        var _is_blob = (state == PSTATE.BLOB);
+        var _atk_reach = _is_blob ? 54 : 64;
+        var _atk_x = x + facing * _atk_reach;
+        var _atk_y = _is_blob ? y - 30 : y - 64;
         var _atk = instance_create_layer(_atk_x, _atk_y, LAYER_INSTANCES, obj_attack_hitbox);
         _atk.direction_facing = facing;
         _atk.damage = PLAYER_ATTACK_DAMAGE;
@@ -170,7 +174,7 @@ function player_apply_collision() {
 }
 
 function player_camera_follow() {
-    if (!camera_exists(cam)) return;
+    if (!variable_instance_exists(id, "cam") || cam == -1) return;
     var _cw = camera_get_view_width(cam);
     var _ch = camera_get_view_height(cam);
     var _cx = clamp(x - _cw * 0.5, 0, max(0, room_width - _cw));

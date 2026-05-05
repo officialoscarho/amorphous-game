@@ -14,7 +14,7 @@
   "name":"rm_l1_arrival",
   "parent":{
     "name":"Level 1",
-    "path":"folders/Levels/Level 1.yy",
+    "path":"folders/Rooms/Level 1.yy",
   },
   "parentRoom":null,
   "physicsSettings":{

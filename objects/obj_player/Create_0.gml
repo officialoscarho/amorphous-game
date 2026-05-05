@@ -10,6 +10,7 @@ attack_cooldown = 0;
 attack_anim_timer = 0;
 invuln_frames = 0;
 hurt_frames = 0;
+hurt_return_state = PSTATE.NORMAL;
 death_timer = 0;
 
 dash_frames = 0;
@@ -23,6 +24,7 @@ if (global.pending_spawn_active) {
     x = global.pending_spawn_x;
     y = global.pending_spawn_y;
     state = global.pending_player_state;
+    hurt_return_state = (state == PSTATE.BLOB) ? PSTATE.BLOB : PSTATE.NORMAL;
     global.pending_spawn_active = false;
 }
 

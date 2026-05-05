@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":1,
   "parent":{
-    "name":"Environmental",
-    "path":"folders/Environmental.yy",
+    "name":"Hazards",
+    "path":"folders/Hazards.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

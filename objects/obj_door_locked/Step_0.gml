@@ -1,1 +1,1 @@
-sprite_index = is_open ? spr_hazard_pit : spr_door_locked;
+sprite_index = is_open ? spr_door_open : spr_door_locked;

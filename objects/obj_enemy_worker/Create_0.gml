@@ -8,5 +8,5 @@ attack_range = 36;
 attack_cooldown_max = 50;
 state = ESTATE.PATROL;
 state_timer = 60;
-mask_index = spr_enemy_worker_idle;
-sprite_index = spr_mask_enemy_worker;
+mask_index = spr_mask_enemy_worker;
+sprite_index = spr_enemy_worker_idle;

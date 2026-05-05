@@ -17,8 +17,8 @@
   ],
   "name":"rm_memory_log",
   "parent":{
-    "name":"Levels",
-    "path":"folders/Levels.yy",
+    "name":"Rooms",
+    "path":"folders/Rooms.yy",
   },
   "parentRoom":null,
   "physicsSettings":{

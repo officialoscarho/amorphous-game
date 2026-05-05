@@ -1,8 +1,10 @@
 function player_animate() {
     var _spr = spr_player_humanoid_idle;
 
-    if (state == PSTATE.BLOB) {
-        if (attack_anim_timer > 0) {
+    if (state == PSTATE.BLOB || (state == PSTATE.HURT && hurt_return_state == PSTATE.BLOB)) {
+        if (state == PSTATE.HURT) {
+            _spr = spr_player_blob_hurt;
+        } else if (attack_anim_timer > 0) {
             _spr = spr_player_blob_attack;
         } else if (!on_ground) {
             _spr = (ysp < 0) ? spr_player_blob_jump : spr_player_blob_fall;
