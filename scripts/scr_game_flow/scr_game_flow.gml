@@ -20,6 +20,7 @@ function game_runtime_init() {
     global.paused = false;
     global.gameplay_active = false;
     global.scene_lock = false;
+    global.death_menu_active = false;
     global.boss = noone;
 
     global.pending_spawn_active = false;
@@ -44,6 +45,8 @@ function game_goto_room(_room_name, _x, _y, _state) {
     global.pending_spawn_y = _y;
     global.pending_player_state = _state;
     global.paused = false;
+    global.scene_lock = false;
+    global.death_menu_active = false;
     global.gameplay_active = true;
 
     room_goto(_room);
@@ -55,6 +58,13 @@ function game_start_new() {
     save_write();
     game_runtime_apply_save();
     return game_goto_room("Prologue", 128, 704, PSTATE.BLOB);
+}
+
+function game_delete_save() {
+    var _had_file = save_has_file();
+    save_delete_current();
+    game_runtime_apply_save();
+    return _had_file;
 }
 
 function game_continue() {
@@ -70,6 +80,8 @@ function game_continue() {
 
 function game_return_to_title() {
     global.paused = false;
+    global.scene_lock = false;
+    global.death_menu_active = false;
     global.gameplay_active = false;
     room_goto(rm_title);
 }

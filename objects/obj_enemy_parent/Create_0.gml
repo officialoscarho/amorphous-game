@@ -5,6 +5,15 @@ move_speed = 1.5;
 detect_range = 220;
 attack_range = 36;
 attack_cooldown_max = 60;
+attack_fire_frame = 8;
+attack_has_fired = false;
+attack_hitbox_distance = 42;
+attack_hitbox_y = -64;
+attack_hitbox_life = 8;
+attack_hitbox_scale = 1.15;
+enemy_attack_action = function() {
+    enemy_spawn_melee_attack();
+};
 
 state = ESTATE.IDLE;
 state_timer = 0;

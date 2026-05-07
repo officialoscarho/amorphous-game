@@ -12,7 +12,7 @@ draw_set_color(c_white);
 draw_text(_gw * 0.5, 170, "Prologue + Level 1 + Level 2 Build");
 
 for (var _i = 0; _i < array_length(menu_items); _i++) {
-    var _disabled = (menu_items[_i] == "Continue" && !save_has_file());
+    var _disabled = ((menu_items[_i] == "Continue" || menu_items[_i] == "Delete Save") && !save_has_file());
     var _y = 260 + _i * 52;
 
     draw_set_color((_i == menu_index) ? make_color_rgb(40, 40, 60) : make_color_rgb(18, 18, 28));
@@ -22,6 +22,11 @@ for (var _i = 0; _i < array_length(menu_items); _i++) {
     else draw_set_color((_i == menu_index) ? c_yellow : c_white);
 
     draw_text(_gw * 0.5, _y, menu_items[_i]);
+}
+
+if (message_timer > 0) {
+    draw_set_color(make_color_rgb(210, 226, 242));
+    draw_text(_gw * 0.5, 260 + array_length(menu_items) * 52 + 16, message_text);
 }
 
 draw_set_halign(fa_left);

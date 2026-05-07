@@ -1,5 +1,11 @@
 LIVE TODO
-- Reflect actual current state of the project. Update as items complete.
-- Cross out completed items rather than deleting (audit trail).
 
-Currently at Step 9, has not yet tested Step 1-8
+1. Run Gate A from _planning_ignored/Dev_Build_Guide_v2.md in GameMaker.
+2. In the GameMaker IDE, create spr_player_slash and spr_mask_player_humanoid.
+3. Build each Level 1 room with MainTiles, obj_player, encounters, fragments,
+   checkpoints, and transitions.
+4. Build each Level 2 room with MainTiles, obj_player, hazards, switches,
+   compactors, fragments, bosses, and transitions.
+5. Verify death menu, prompt text, slash visual, humanoid mask, guard
+   projectiles, pickup landing, boss collision, and top boss health bar.
+6. Run the full menu-to-rm_end_demo pass and refresh repo_state_index.md.

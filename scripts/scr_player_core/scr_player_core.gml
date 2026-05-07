@@ -67,8 +67,14 @@ function player_state_dead() {
     player_apply_gravity();
     player_apply_collision();
 
-    death_timer--;
-    if (death_timer <= 0) player_do_respawn();
+    if (death_timer > 0) {
+        death_timer--;
+        return;
+    }
+
+    ysp = 0;
+    global.death_menu_active = true;
+    global.scene_lock = true;
 }
 
 function player_input_move(_speed) {
@@ -90,16 +96,17 @@ function player_input_jump() {
 function player_input_attack() {
     if ((mouse_check_button_pressed(mb_left) || keyboard_check_pressed(ord("J"))) && attack_cooldown <= 0) {
         attack_cooldown = PLAYER_ATTACK_COOLDOWN;
-        attack_anim_timer = 8;
+        attack_anim_timer = 10;
 
         var _is_blob = (state == PSTATE.BLOB);
-        var _atk_reach = _is_blob ? 54 : 64;
+        var _atk_reach = _is_blob ? 66 : 84;
         var _atk_x = x + facing * _atk_reach;
         var _atk_y = _is_blob ? y - 30 : y - 64;
         var _atk = instance_create_layer(_atk_x, _atk_y, LAYER_INSTANCES, obj_attack_hitbox);
         _atk.direction_facing = facing;
         _atk.damage = PLAYER_ATTACK_DAMAGE;
-        _atk.life_frames = 8;
+        _atk.life_frames = 10;
+        _atk.range_scale = _is_blob ? 1.35 : 1.6;
     }
 }
 
@@ -183,9 +190,19 @@ function player_camera_follow() {
 }
 
 function player_respawn_check() {
-    if (y > room_height + 256) player_do_respawn();
+    if (y <= room_height + 256) return;
+    if (state == PSTATE.DEAD) return;
+
+    global.player_health = 0;
+    state = PSTATE.DEAD;
+    death_timer = 30;
+    xsp = 0;
+    ysp = 0;
 }
 
 function player_do_respawn() {
+    global.death_menu_active = false;
+    global.scene_lock = false;
+    global.paused = false;
     game_continue();
 }

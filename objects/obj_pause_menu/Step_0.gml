@@ -1,4 +1,5 @@
 if (!global.gameplay_active) exit;
+if (variable_global_exists("death_menu_active") && global.death_menu_active) exit;
 
 if (keyboard_check_pressed(vk_escape)) {
     global.paused = !global.paused;

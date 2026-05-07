@@ -11,7 +11,7 @@ burst_cooldown = 0;
 mask_index = spr_mask_boss_security;
 sprite_index = spr_boss_security_idle;
 
-boss_ai = function() {
+boss_ai_action = function() {
     if (!instance_exists(obj_player)) return;
 
     var _dx = obj_player.x - x;
@@ -50,12 +50,12 @@ boss_ai = function() {
     if (burst_cooldown > 0) burst_cooldown--;
 };
 
-boss_on_phase_change = function() {
+boss_phase_change_action = function() {
     attack_timer = 45;
     shots_left = 0;
 };
 
-boss_on_defeat = function() {
+boss_defeat_action = function() {
     global.has_double_jump = true;
     global.save.has_double_jump = true;
     save_write();

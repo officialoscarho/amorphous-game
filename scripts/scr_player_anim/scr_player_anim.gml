@@ -30,6 +30,11 @@ function player_animate() {
     }
 
     sprite_index = _spr;
+    
+    var _humanoid_mask = asset_get_index("spr_mask_player_humanoid");
+    var _use_blob_mask = (state == PSTATE.BLOB || (state == PSTATE.HURT && hurt_return_state == PSTATE.BLOB));
+    mask_index = (_use_blob_mask || _humanoid_mask == -1) ? spr_mask_player : _humanoid_mask;
+    
     image_xscale = facing;
 
     if (invuln_frames > 0 && (invuln_frames mod 4 < 2)) {

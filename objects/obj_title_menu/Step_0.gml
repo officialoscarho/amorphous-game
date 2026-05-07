@@ -1,3 +1,5 @@
+if (message_timer > 0) message_timer--;
+
 if (keyboard_check_pressed(vk_down) || keyboard_check_pressed(ord("S"))) {
     menu_index = (menu_index + 1) mod array_length(menu_items);
 }
@@ -19,6 +21,13 @@ if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(vk_space)) {
             room_goto(rm_memory_log);
             break;
         case 3:
+            if (save_has_file()) {
+                game_delete_save();
+                message_text = "Save deleted";
+                message_timer = 90;
+            }
+            break;
+        case 4:
             game_end();
             break;
     }

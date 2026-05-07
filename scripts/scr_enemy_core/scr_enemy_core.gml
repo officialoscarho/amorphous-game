@@ -22,7 +22,8 @@ function enemy_state_alert() {
         state = ESTATE.ATTACK;
         state_timer = 20;
         attack_timer = attack_cooldown_max;
-        enemy_perform_attack();
+        attack_has_fired = false;
+        xsp = 0;
     } else {
         xsp = facing * move_speed;
     }
@@ -30,6 +31,10 @@ function enemy_state_alert() {
 
 function enemy_state_attack() {
     xsp = 0;
+    if (!attack_has_fired && state_timer <= attack_fire_frame) {
+        enemy_attack_action();
+        attack_has_fired = true;
+    }
     if (state_timer <= 0) state = ESTATE.ALERT;
 }
 
@@ -82,10 +87,11 @@ function enemy_drop_loot() {
 
     if (drop_table == "default") {
         var _roll = random(1);
+        var _drop_y = bbox_bottom - 16;
         if (_roll < 0.20) {
-            instance_create_layer(x, y, LAYER_INSTANCES, obj_pickup_health);
+            instance_create_layer(x, _drop_y, LAYER_INSTANCES, obj_pickup_health);
         } else if (_roll < 0.35) {
-            instance_create_layer(x, y, LAYER_INSTANCES, obj_pickup_energy);
+            instance_create_layer(x, _drop_y, LAYER_INSTANCES, obj_pickup_energy);
         }
     }
 }
@@ -134,5 +140,16 @@ function enemy_apply_physics() {
     }
 }
 
+function enemy_spawn_melee_attack() {
+    if (contact_damage <= 0) return;
+
+    var _hit = instance_create_layer(x + facing * attack_hitbox_distance, y + attack_hitbox_y, LAYER_INSTANCES, obj_boss_melee_hit);
+    _hit.direction_facing = facing;
+    _hit.damage = contact_damage;
+    _hit.life_frames = attack_hitbox_life;
+    _hit.range_scale = attack_hitbox_scale;
+}
+
 function enemy_perform_attack() {
+    enemy_spawn_melee_attack();
 }

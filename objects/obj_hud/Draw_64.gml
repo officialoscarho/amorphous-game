@@ -62,24 +62,24 @@ draw_text(_frag_x + _frag_w - 16, _frag_y + 12, "Fragments " + string(array_leng
 draw_set_halign(fa_left);
 
 if (global.boss != noone && instance_exists(global.boss)) {
-    var _bw = _gw - 240;
-    var _bx = 120;
-    var _by = _gh - 72;
+    var _bw = clamp(_gw * 0.42, 320, 560);
+    var _bx = (_gw - _bw) * 0.5;
+    var _by = 52;
     var _pct = global.boss.hp / max(1, global.boss.hp_max);
 
     draw_set_alpha(0.86);
     draw_set_color(make_color_rgb(5, 7, 12));
-    draw_rectangle(_bx - 12, _by - 32, _bx + _bw + 12, _by + 32, false);
+    draw_rectangle(_bx - 12, _by - 28, _bx + _bw + 12, _by + 30, false);
     draw_set_alpha(1);
     draw_set_color(make_color_rgb(92, 120, 150));
-    draw_rectangle(_bx - 12, _by - 32, _bx + _bw + 12, _by + 32, true);
+    draw_rectangle(_bx - 12, _by - 28, _bx + _bw + 12, _by + 30, true);
     draw_set_color(make_color_rgb(220, 52, 72));
-    draw_rectangle(_bx, _by, _bx + _bw * _pct, _by + 20, false);
+    draw_rectangle(_bx, _by, _bx + _bw * _pct, _by + 18, false);
     draw_set_color(make_color_rgb(255, 226, 230));
-    draw_rectangle(_bx, _by, _bx + _bw, _by + 20, true);
+    draw_rectangle(_bx, _by, _bx + _bw, _by + 18, true);
     draw_set_color(make_color_rgb(230, 238, 248));
     draw_set_halign(fa_center);
-    draw_text(_bx + _bw * 0.5, _by - 24, global.boss.boss_name);
+    draw_text(_bx + _bw * 0.5, _by - 20, global.boss.boss_name);
     draw_set_halign(fa_left);
 }
 
@@ -113,6 +113,37 @@ if (prompt_timer > 0) {
     draw_set_color(make_color_rgb(230, 238, 248));
     draw_set_halign(fa_center);
     draw_text(_px + _pw * 0.5, _py + 14, prompt_text);
+    draw_set_halign(fa_left);
+}
+
+if (variable_global_exists("death_menu_active") && global.death_menu_active) {
+    draw_set_alpha(0.72);
+    draw_set_color(c_black);
+    draw_rectangle(0, 0, _gw, _gh, false);
+    draw_set_alpha(1);
+
+    var _mw = min(420, _gw - 64);
+    var _mx = (_gw - _mw) * 0.5;
+    var _my = _gh * 0.5 - 116;
+
+    draw_set_color(make_color_rgb(8, 10, 18));
+    draw_rectangle(_mx, _my, _mx + _mw, _my + 232, false);
+    draw_set_color(make_color_rgb(92, 120, 150));
+    draw_rectangle(_mx, _my, _mx + _mw, _my + 232, true);
+
+    draw_set_halign(fa_center);
+    draw_set_valign(fa_top);
+    draw_set_color(make_color_rgb(255, 226, 230));
+    draw_text(_gw * 0.5, _my + 28, "You Died");
+
+    for (var _i = 0; _i < array_length(death_menu_items); _i++) {
+        var _iy = _my + 92 + _i * 52;
+        draw_set_color((_i == death_menu_index) ? make_color_rgb(40, 40, 60) : make_color_rgb(18, 18, 28));
+        draw_rectangle(_mx + 64, _iy - 10, _mx + _mw - 64, _iy + 32, false);
+        draw_set_color((_i == death_menu_index) ? c_yellow : c_white);
+        draw_text(_gw * 0.5, _iy, death_menu_items[_i]);
+    }
+
     draw_set_halign(fa_left);
 }
 
