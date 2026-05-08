@@ -52,9 +52,4 @@ state.
   layers with horizontal tiling on and stretching off.
 - Keep the larger hazard, player-animation, and robot asset packs for after the
   current build is playable end to end.
-
-## Editing Boundary
-
-Resource, room, sprite, and `.yy` edits should be made in the GameMaker IDE.
-Planning docs and explicitly requested `.gml` files are the safe text-editing
-surface.
+  
