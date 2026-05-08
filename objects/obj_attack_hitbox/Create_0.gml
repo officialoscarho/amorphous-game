@@ -1,12 +1,15 @@
 damage = PLAYER_ATTACK_DAMAGE;
 life_frames = 8;
 direction_facing = 1;
-range_scale = 1.0;
+visual_scale = 0.8;
+hit_half_width = 52;
+hit_top = -48;
+hit_bottom = 38;
 
-var _slash_sprite = asset_get_index("spr_player_slash");
-sprite_index = (_slash_sprite == -1) ? spr_attack_hitbox : _slash_sprite;
+sprite_index = spr_player_slash;
 mask_index = spr_attack_hitbox;
 visible = true;
-image_alpha = (_slash_sprite == -1) ? 0.35 : 0.9;
-image_blend = (_slash_sprite == -1) ? make_color_rgb(255, 230, 80) : c_white;
+image_alpha = 0.9;
+image_blend = c_white;
+image_speed = 0;
 hit_ids = ds_list_create();

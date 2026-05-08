@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":7,
   "parent":{
-    "name":"Player",
-    "path":"folders/Player.yy",
+    "name":"Blob-Form",
+    "path":"folders/Player/Blob-Form.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

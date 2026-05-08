@@ -68,6 +68,8 @@ function enemy_take_damage(_amount, _from_x) {
         hp = 0;
         state = ESTATE.DEAD;
         state_timer = 30;
+        contact_damage = 0;
+        attack_has_fired = true;
         ysp = -4;
         return;
     }

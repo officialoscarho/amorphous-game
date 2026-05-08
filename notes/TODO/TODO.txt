@@ -1,11 +1,26 @@
 LIVE TODO
 
 1. Run Gate A from _planning_ignored/Dev_Build_Guide_v2.md in GameMaker.
-2. In the GameMaker IDE, create spr_player_slash and spr_mask_player_humanoid.
-3. Build each Level 1 room with MainTiles, obj_player, encounters, fragments,
-   checkpoints, and transitions.
-4. Build each Level 2 room with MainTiles, obj_player, hazards, switches,
-   compactors, fragments, bosses, and transitions.
-5. Verify death menu, prompt text, slash visual, humanoid mask, guard
-   projectiles, pickup landing, boss collision, and top boss health bar.
-6. Run the full menu-to-rm_end_demo pass and refresh repo_state_index.md.
+2. In the GameMaker IDE, center spr_player_slash's origin and fix
+   spr_mask_player_humanoid's bbox to cover the humanoid form.
+3. Import or rename the horizontal backgrounds as spr_bg_level1 and
+   spr_bg_level2, assign them to Level 1/Level 2 Background layers, enable
+   horizontal tiling, and disable stretching.
+4. Build each Level 1 room with MainTiles, varied tile composition, obj_player,
+   encounters, fragments, checkpoints, and transitions.
+5. Build each Level 2 room with MainTiles, varied tile composition, obj_player,
+   hazards, switches, compactors, fragments, bosses, and transitions.
+6. Decide whether to recreate any _planning_ignored/other_rooms layouts in the
+   live Level 2 rooms through the GameMaker IDE.
+7. Verify death menu, prompt text, fragment text, Memory Log visibility, blob
+   attack animation, humanoid slash visual, humanoid mask, ducking, shooting,
+   larger projectiles, dead enemy contact, guard projectiles, pickup landing,
+   boss collision, and top boss health bar.
+8. Verify the prologue shift works from any known human enemy, not just a
+   worker.
+9. Verify long rooms pan with the player, room transitions fade, Level 1/Level
+   2 backgrounds tile horizontally, and the Level 1 boss exit is reachable
+   after double jump.
+10. Keep the large hazard, robot, blob, and guy animation asset packs until the
+   current build is playable end to end.
+11. Run the full menu-to-rm_end_demo pass and refresh repo_state_index.md.

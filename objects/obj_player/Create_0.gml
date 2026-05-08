@@ -8,6 +8,9 @@ jumps_left = 1;
 
 attack_cooldown = 0;
 attack_anim_timer = 0;
+shoot_cooldown = 0;
+shoot_anim_timer = 0;
+ducking = false;
 invuln_frames = 0;
 hurt_frames = 0;
 hurt_return_state = PSTATE.NORMAL;
@@ -28,9 +31,18 @@ if (global.pending_spawn_active) {
     global.pending_spawn_active = false;
 }
 
+player_apply_form_mask();
+player_resolve_form_overlap();
+game_apply_room_background();
+
 cam = camera_create();
-camera_set_view_size(cam, 1366, 768);
+camera_set_view_size(cam, CAMERA_VIEW_W, CAMERA_VIEW_H);
+view_enabled = true;
 view_set_camera(0, cam);
 view_set_visible(0, true);
-view_set_wport(0, 1366);
-view_set_hport(0, 768);
+view_set_xport(0, 0);
+view_set_yport(0, 0);
+view_set_wport(0, CAMERA_VIEW_W);
+view_set_hport(0, CAMERA_VIEW_H);
+display_set_gui_size(CAMERA_VIEW_W, CAMERA_VIEW_H);
+player_camera_snap();

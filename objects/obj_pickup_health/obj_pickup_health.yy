@@ -30,7 +30,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_pickup_health",
+    "path":"sprites/spr_pickup_health/spr_pickup_health.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

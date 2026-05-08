@@ -30,7 +30,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_laser_barrier",
+    "path":"sprites/spr_laser_barrier/spr_laser_barrier.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

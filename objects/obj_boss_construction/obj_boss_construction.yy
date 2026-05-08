@@ -33,7 +33,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_boss_construction_idle",
+    "path":"sprites/spr_boss_construction_idle/spr_boss_construction_idle.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

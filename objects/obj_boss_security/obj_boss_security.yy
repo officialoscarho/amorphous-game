@@ -33,7 +33,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_boss_security_walk",
+    "path":"sprites/spr_boss_security_walk/spr_boss_security_walk.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

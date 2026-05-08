@@ -8,8 +8,20 @@
   "instanceCreationOrder":[],
   "isDnd":false,
   "layers":[
-    {"$GMRInstanceLayer":"","%Name":"Instances","depth":0,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[],"layers":[],"name":"Instances","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
-    {"$GMRBackgroundLayer":"","%Name":"Background","animationFPS":15.0,"animationSpeedType":0,"colour":4278190080,"depth":100,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"hspeed":0.0,"htiled":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Background","properties":[],"resourceType":"GMRBackgroundLayer","resourceVersion":"2.0","spriteId":null,"stretch":false,"userdefinedAnimFPS":false,"userdefinedDepth":false,"visible":true,"vspeed":0.0,"vtiled":false,"x":0,"y":0,},
+    {"$GMRTileLayer":"","%Name":"MainTiles","depth":0,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"MainTiles","properties":[],"resourceType":"GMRTileLayer","resourceVersion":"2.0","tiles":{"SerialiseHeight":60,"SerialiseWidth":34,"TileCompressedData":[
+          1,25,-32,-2147483648,2,17,25,-31,-2147483648,3,0,17,25,-30,-2147483648,-2,0,2,17,25,-30,-2147483648,
+          -2,0,2,17,25,-30,-2147483648,-2,0,2,17,25,-30,-2147483648,-2,0,2,17,25,-30,-2147483648,-2,0,2,17,25,
+          -30,-2147483648,-2,0,2,17,25,-30,-2147483648,4,0,-2147483648,17,25,-32,-2147483648,2,17,25,-32,-2147483648,
+          2,17,25,-32,-2147483648,2,17,25,-32,-2147483648,2,17,25,-32,-2147483648,2,17,25,-32,-2147483648,2,17,
+          25,-32,-2147483648,2,17,25,-32,-2147483648,2,17,25,-32,-2147483648,2,17,25,-32,-2147483648,2,17,25,-32,
+          -2147483648,2,17,25,-32,-2147483648,2,17,25,-32,-2147483648,2,17,25,-32,-2147483648,2,17,25,-32,-2147483648,
+          2,17,25,-32,-2147483648,2,17,25,-32,-2147483648,2,17,25,-32,-2147483648,3,17,25,0,-31,-2147483648,3,
+          17,25,0,-31,-2147483648,3,17,25,0,-31,-2147483648,2,17,25,-32,-2147483648,2,17,25,-31,-2147483648,3,
+          0,17,25,-31,-2147483648,3,0,17,25,-31,-2147483648,3,0,17,25,-31,-2147483648,3,0,17,25,-31,-2147483648,
+          3,0,17,31,-32,34,1,30,-782,-2147483648,
+        ],"TileDataFormat":1,},"tilesetId":{"name":"ts_debug_2","path":"tilesets/ts_debug_2/ts_debug_2.yy",},"userdefinedDepth":false,"visible":true,"x":0,"y":0,},
+    {"$GMRInstanceLayer":"","%Name":"Instances","depth":100,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"instances":[],"layers":[],"name":"Instances","properties":[],"resourceType":"GMRInstanceLayer","resourceVersion":"2.0","userdefinedDepth":false,"visible":true,},
+    {"$GMRBackgroundLayer":"","%Name":"Background","animationFPS":30.0,"animationSpeedType":0,"colour":4294967295,"depth":200,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"hspeed":0.0,"htiled":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Background","properties":[],"resourceType":"GMRBackgroundLayer","resourceVersion":"2.0","spriteId":{"name":"spr_bg_level2_vert","path":"sprites/spr_bg_level2_vert/spr_bg_level2_vert.yy",},"stretch":true,"userdefinedAnimFPS":false,"userdefinedDepth":false,"visible":true,"vspeed":0.0,"vtiled":true,"x":0,"y":0,},
   ],
   "name":"rm_l2_bot_shaft",
   "parent":{
@@ -27,10 +39,10 @@
   "resourceType":"GMRoom",
   "resourceVersion":"2.0",
   "roomSettings":{
-    "Height":768,
+    "Height":1920,
     "inheritRoomSettings":false,
     "persistent":false,
-    "Width":1366,
+    "Width":1080,
   },
   "sequenceId":null,
   "views":[

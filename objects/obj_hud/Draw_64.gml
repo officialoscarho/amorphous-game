@@ -147,5 +147,22 @@ if (variable_global_exists("death_menu_active") && global.death_menu_active) {
     draw_set_halign(fa_left);
 }
 
+if (variable_global_exists("room_transition_active") && global.room_transition_active) {
+    var _transition_alpha = clamp(global.room_transition_alpha, 0, 1);
+    draw_set_alpha(_transition_alpha);
+    draw_set_color(c_black);
+    draw_rectangle(0, 0, _gw, _gh, false);
+
+    if (_transition_alpha > 0.65) {
+        draw_set_alpha((_transition_alpha - 0.65) / 0.35);
+        draw_set_color(make_color_rgb(210, 226, 242));
+        draw_set_halign(fa_center);
+        draw_set_valign(fa_middle);
+        draw_text(_gw * 0.5, _gh * 0.5, "Loading...");
+        draw_set_halign(fa_left);
+        draw_set_valign(fa_top);
+    }
+}
+
 draw_set_alpha(1);
 draw_set_valign(fa_top);

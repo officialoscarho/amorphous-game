@@ -26,8 +26,8 @@
   "resourceType":"GMTileSet",
   "resourceVersion":"2.0",
   "spriteId":{
-    "name":"spr_tileset_debug",
-    "path":"sprites/spr_tileset_debug/spr_tileset_debug.yy",
+    "name":"spr_tileset_debug_2",
+    "path":"sprites/spr_tileset_debug_2/spr_tileset_debug_2.yy",
   },
   "spriteNoExport":false,
   "textureGroupId":{

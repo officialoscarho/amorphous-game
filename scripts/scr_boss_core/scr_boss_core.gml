@@ -8,6 +8,19 @@ function boss_on_phase_change() {
 function boss_on_defeat() {
 }
 
+function boss_take_damage(_amount) {
+    if (dead) return;
+
+    hp -= _amount;
+    hurt_flash_timer = 6;
+    if (hp <= 0) {
+        hp = 0;
+        dead = true;
+        state_timer = 60;
+        xsp = 0;
+    }
+}
+
 function boss_floor_blocked_at(_tilemap, _candidate_y, _edge_y, _left_x, _right_x) {
     var _probe_y = _candidate_y + _edge_y;
     return (

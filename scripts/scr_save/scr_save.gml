@@ -29,6 +29,7 @@ function save_backfill() {
     if (!variable_struct_exists(global.save, "prologue_shift_done")) global.save.prologue_shift_done = false;
     if (!variable_struct_exists(global.save, "fragments_collected")) global.save.fragments_collected = [];
     if (!variable_struct_exists(global.save, "bosses_defeated")) global.save.bosses_defeated = [];
+    global.save.fragments_collected = save_clean_fragment_array(global.save.fragments_collected);
 }
 
 function save_write() {
@@ -76,6 +77,27 @@ function save_array_has(_arr, _id) {
     return false;
 }
 
+function save_fragment_id_is_valid(_id) {
+    switch (_id) {
+        case "l1_sample_496":
+        case "l1_pulse_logs":
+        case "l2_katya_log":
+        case "l2_fleet_directive":
+            return true;
+    }
+    return false;
+}
+
+function save_clean_fragment_array(_arr) {
+    var _clean = [];
+    for (var _i = 0; _i < array_length(_arr); _i++) {
+        var _id = _arr[_i];
+        if (!save_fragment_id_is_valid(_id)) continue;
+        if (!save_array_has(_clean, _id)) array_push(_clean, _id);
+    }
+    return _clean;
+}
+
 function save_has_fragment(_id) {
     save_backfill();
     return save_array_has(global.save.fragments_collected, _id);
@@ -83,10 +105,15 @@ function save_has_fragment(_id) {
 
 function save_add_fragment(_id) {
     save_backfill();
+    if (!save_fragment_id_is_valid(_id)) {
+        show_debug_message("Invalid fragment id: " + string(_id));
+        return false;
+    }
     if (!save_has_fragment(_id)) {
         array_push(global.save.fragments_collected, _id);
         save_write();
     }
+    return true;
 }
 
 function save_has_boss(_id) {

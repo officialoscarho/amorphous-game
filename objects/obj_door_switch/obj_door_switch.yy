@@ -32,7 +32,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_switch_off",
+    "path":"sprites/spr_switch_off/spr_switch_off.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

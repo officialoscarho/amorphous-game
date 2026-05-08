@@ -31,7 +31,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_compactor",
+    "path":"sprites/spr_compactor/spr_compactor.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

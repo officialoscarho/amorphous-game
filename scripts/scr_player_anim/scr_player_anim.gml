@@ -1,3 +1,25 @@
+function player_apply_form_mask() {
+    var _use_blob_mask = (state == PSTATE.BLOB || (state == PSTATE.HURT && hurt_return_state == PSTATE.BLOB));
+    var _is_ducking = variable_instance_exists(id, "ducking") && ducking && !_use_blob_mask;
+    var _humanoid_mask = player_humanoid_mask_get();
+
+    if (_use_blob_mask || _is_ducking) {
+        mask_index = spr_mask_player;
+    } else {
+        mask_index = _humanoid_mask;
+    }
+}
+
+function player_humanoid_mask_get() {
+    var _humanoid_mask = spr_mask_player_humanoid;
+
+    if (sprite_get_bbox_bottom(_humanoid_mask) < sprite_get_height(_humanoid_mask) - 8) {
+        _humanoid_mask = spr_player_humanoid_idle;
+    }
+
+    return _humanoid_mask;
+}
+
 function player_animate() {
     var _spr = spr_player_humanoid_idle;
 
@@ -21,6 +43,8 @@ function player_animate() {
         _spr = spr_player_humanoid_run_start;
     } else if (attack_anim_timer > 0) {
         _spr = spr_player_humanoid_attack;
+    } else if (shoot_anim_timer > 0) {
+        _spr = spr_player_humanoid_attack;
     } else if (!on_ground) {
         _spr = (ysp < 0) ? spr_player_humanoid_jump : spr_player_humanoid_fall;
     } else if (abs(xsp) > 0.1) {
@@ -30,12 +54,10 @@ function player_animate() {
     }
 
     sprite_index = _spr;
-    
-    var _humanoid_mask = asset_get_index("spr_mask_player_humanoid");
-    var _use_blob_mask = (state == PSTATE.BLOB || (state == PSTATE.HURT && hurt_return_state == PSTATE.BLOB));
-    mask_index = (_use_blob_mask || _humanoid_mask == -1) ? spr_mask_player : _humanoid_mask;
+    player_apply_form_mask();
     
     image_xscale = facing;
+    image_yscale = (variable_instance_exists(id, "ducking") && ducking && state == PSTATE.NORMAL) ? 0.72 : 1;
 
     if (invuln_frames > 0 && (invuln_frames mod 4 < 2)) {
         image_alpha = 0.35;

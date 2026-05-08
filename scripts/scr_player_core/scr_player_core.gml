@@ -8,6 +8,8 @@ function player_step() {
     if (invuln_frames > 0) invuln_frames--;
     if (attack_cooldown > 0) attack_cooldown--;
     if (attack_anim_timer > 0) attack_anim_timer--;
+    if (shoot_cooldown > 0) shoot_cooldown--;
+    if (shoot_anim_timer > 0) shoot_anim_timer--;
     if (dash_cooldown > 0) dash_cooldown--;
 
     switch (state) {
@@ -24,6 +26,7 @@ function player_step() {
 }
 
 function player_state_blob() {
+    ducking = false;
     player_input_move(PLAYER_BLOB_SPEED);
     player_input_jump();
     player_input_attack();
@@ -32,10 +35,12 @@ function player_state_blob() {
 }
 
 function player_state_normal() {
-    player_input_move(PLAYER_MOVE_SPEED);
-    player_input_jump();
+    player_input_duck();
+    player_input_move(ducking ? PLAYER_DUCK_SPEED : PLAYER_MOVE_SPEED);
+    if (!ducking) player_input_jump();
     player_input_attack();
-    player_input_dash();
+    player_input_shoot();
+    if (!ducking) player_input_dash();
     player_apply_gravity();
     player_apply_collision();
 }
@@ -88,17 +93,38 @@ function player_input_move(_speed) {
 
 function player_input_jump() {
     if (keyboard_check_pressed(vk_space) && jumps_left > 0) {
-        ysp = PLAYER_JUMP_FORCE;
+        var _max_jumps = global.has_double_jump ? 2 : 1;
+        var _is_extra_jump = !on_ground && jumps_left < _max_jumps;
+        ysp = _is_extra_jump ? PLAYER_DOUBLE_JUMP_FORCE : PLAYER_JUMP_FORCE;
         jumps_left--;
     }
 }
 
+function player_input_duck() {
+    if (!variable_instance_exists(id, "ducking")) ducking = false;
+
+    var _wants_duck = keyboard_check(vk_down) || keyboard_check(ord("S"));
+    if (state != PSTATE.NORMAL || !on_ground) {
+        if (ducking && player_can_stand()) ducking = false;
+        return;
+    }
+
+    if (_wants_duck) {
+        ducking = true;
+        return;
+    }
+
+    if (ducking && player_can_stand()) ducking = false;
+}
+
 function player_input_attack() {
     if ((mouse_check_button_pressed(mb_left) || keyboard_check_pressed(ord("J"))) && attack_cooldown <= 0) {
-        attack_cooldown = PLAYER_ATTACK_COOLDOWN;
-        attack_anim_timer = 10;
-
         var _is_blob = (state == PSTATE.BLOB);
+
+        attack_cooldown = PLAYER_ATTACK_COOLDOWN;
+        attack_anim_timer = _is_blob ? PLAYER_BLOB_ATTACK_ANIM_FRAMES : PLAYER_HUMANOID_ATTACK_ANIM_FRAMES;
+        image_index = 0;
+
         var _atk_reach = _is_blob ? 66 : 84;
         var _atk_x = x + facing * _atk_reach;
         var _atk_y = _is_blob ? y - 30 : y - 64;
@@ -106,8 +132,37 @@ function player_input_attack() {
         _atk.direction_facing = facing;
         _atk.damage = PLAYER_ATTACK_DAMAGE;
         _atk.life_frames = 10;
-        _atk.range_scale = _is_blob ? 1.35 : 1.6;
+
+        if (_is_blob) {
+            _atk.visible = false;
+            _atk.hit_half_width = 44;
+            _atk.hit_top = -28;
+            _atk.hit_bottom = 24;
+        } else {
+            _atk.visual_scale = 0.8;
+            _atk.hit_half_width = 52;
+            _atk.hit_top = -48;
+            _atk.hit_bottom = 38;
+        }
     }
+}
+
+function player_input_shoot() {
+    if (shoot_cooldown > 0) return;
+    if (!(mouse_check_button_pressed(mb_right) || keyboard_check_pressed(ord("K")))) return;
+
+    shoot_cooldown = PLAYER_SHOOT_COOLDOWN;
+    shoot_anim_timer = 8;
+
+    var _shot_y = ducking ? y - 36 : y - 66;
+    var _shot = instance_create_layer(x + facing * 42, _shot_y, LAYER_INSTANCES, obj_enemy_projectile);
+    _shot.is_player_projectile = true;
+    _shot.direction_facing = facing;
+    _shot.speed_x = PLAYER_SHOT_SPEED;
+    _shot.damage = PLAYER_SHOT_DAMAGE;
+    _shot.life_frames = PLAYER_SHOT_LIFE_FRAMES;
+    _shot.visual_scale = PLAYER_PROJECTILE_VISUAL_SCALE;
+    _shot.image_blend = make_color_rgb(150, 225, 255);
 }
 
 function player_input_dash() {
@@ -180,12 +235,98 @@ function player_apply_collision() {
     }
 }
 
+function player_overlaps_solid_tiles() {
+    var _tilemap = layer_tilemap_get_id(LAYER_TILES);
+    if (_tilemap == -1) return false;
+
+    var _left = bbox_left + 1;
+    var _right = bbox_right - 1;
+    var _top = bbox_top + 1;
+    var _bottom = bbox_bottom - 1;
+
+    return (
+        tilemap_get_at_pixel(_tilemap, _left, _top) != 0 ||
+        tilemap_get_at_pixel(_tilemap, _right, _top) != 0 ||
+        tilemap_get_at_pixel(_tilemap, _left, _bottom) != 0 ||
+        tilemap_get_at_pixel(_tilemap, _right, _bottom) != 0
+    );
+}
+
+function player_resolve_form_overlap() {
+    if (!player_overlaps_solid_tiles()) return;
+
+    var _start_y = y;
+    var _steps = 0;
+
+    while (player_overlaps_solid_tiles() && _steps < 96) {
+        y -= 1;
+        _steps++;
+    }
+    if (!player_overlaps_solid_tiles()) {
+        ysp = 0;
+        return;
+    }
+
+    y = _start_y;
+    _steps = 0;
+    while (player_overlaps_solid_tiles() && _steps < 96) {
+        y += 1;
+        _steps++;
+    }
+    if (player_overlaps_solid_tiles()) y = _start_y;
+    ysp = 0;
+}
+
+function player_can_stand() {
+    var _old_mask = mask_index;
+    var _old_ducking = ducking;
+
+    ducking = false;
+    player_apply_form_mask();
+    var _blocked = player_overlaps_solid_tiles();
+
+    ducking = _old_ducking;
+    mask_index = _old_mask;
+    return !_blocked;
+}
+
 function player_camera_follow() {
     if (!variable_instance_exists(id, "cam") || cam == -1) return;
     var _cw = camera_get_view_width(cam);
     var _ch = camera_get_view_height(cam);
-    var _cx = clamp(x - _cw * 0.5, 0, max(0, room_width - _cw));
-    var _cy = clamp(y - _ch * 0.5, 0, max(0, room_height - _ch));
+    var _target_x = clamp(
+        x + facing * CAMERA_LOOKAHEAD_X - _cw * 0.5,
+        0,
+        max(0, room_width - _cw)
+    );
+    var _target_y = clamp(y - _ch * 0.56, 0, max(0, room_height - _ch));
+    var _cx = camera_get_view_x(cam);
+    var _cy = camera_get_view_y(cam);
+
+    if (abs(_target_x - _cx) < 1) {
+        _cx = _target_x;
+    } else {
+        _cx = lerp(_cx, _target_x, CAMERA_FOLLOW_LERP);
+    }
+
+    if (abs(_target_y - _cy) < 1) {
+        _cy = _target_y;
+    } else {
+        _cy = lerp(_cy, _target_y, CAMERA_FOLLOW_LERP);
+    }
+    camera_set_view_pos(cam, _cx, _cy);
+}
+
+function player_camera_snap() {
+    if (!variable_instance_exists(id, "cam") || cam == -1) return;
+    var _cw = camera_get_view_width(cam);
+    var _ch = camera_get_view_height(cam);
+    var _cx = clamp(
+        x + facing * CAMERA_LOOKAHEAD_X - _cw * 0.5,
+        0,
+        max(0, room_width - _cw)
+    );
+    var _cy = clamp(y - _ch * 0.56, 0, max(0, room_height - _ch));
     camera_set_view_pos(cam, _cx, _cy);
 }
 

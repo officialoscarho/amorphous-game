@@ -30,7 +30,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_hazard_spark",
+    "path":"sprites/spr_hazard_spark/spr_hazard_spark.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

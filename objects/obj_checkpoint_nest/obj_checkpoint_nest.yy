@@ -32,7 +32,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_nest_inactive",
+    "path":"sprites/spr_nest_inactive/spr_nest_inactive.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

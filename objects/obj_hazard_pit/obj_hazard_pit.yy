@@ -30,7 +30,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_hazard_pit",
+    "path":"sprites/spr_hazard_pit/spr_hazard_pit.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }

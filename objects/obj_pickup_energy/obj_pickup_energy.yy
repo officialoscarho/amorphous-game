@@ -30,7 +30,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_pickup_energy",
+    "path":"sprites/spr_pickup_energy/spr_pickup_energy.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }
